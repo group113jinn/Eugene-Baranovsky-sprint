@@ -14,6 +14,10 @@ var gGame = {
 init();
 
 function init() {
+
+
+    gBoard = createBoard()
+    setMinesNegsCount()
     renderBoard();
     console.log(gBoard);
 }
@@ -28,9 +32,10 @@ function renderBoard() {
             var cellClass = '';
             if (cell.isMine) {
                 cellClass += ' mine';
+
             }
             strHtml += `<td class = "cell ${cellClass}" onclick="cellClicked(this, ${i}, ${j})">`
-            strHtml += `${cell.minesAroundCount}`
+            if (!cell.isMine) strHtml += `${cell.minesAroundCount}`
             strHtml += `</td>`
         }
         strHtml += `</tr>`
@@ -55,11 +60,8 @@ function createBoard() {
 
 
             board[i][j] = cell;
-            if (cell.isShown && i === 1 && j === 1) cell.isMine = true;
-           if (cell.isShown && i === 3 && j === 2) cell.isMine = true;
-            if (cell.isMine) console.log("cell.i:", setMinesNegsCount(board,cell.i, cell.j));
-            
-
+            if (cell.isShown && i === 1 && j === 2) cell.isMine = true;
+            if (cell.isShown && i === 3 && j === 2) cell.isMine = true;
         }
     }
 
@@ -67,24 +69,29 @@ function createBoard() {
 }
 
 
-function setMinesNegsCount(board,i, j) {
-    console.log("connect", i, j);
 
-    
-    for (var k = i - 1; k < i + 1; k++) {
-        if(k < 0 || s < 0 || k > board.length  || s > board.length -1) continue;
-        for (var s = j - 1; s < j + 1; s++) {
-            if(k < 0 || s < 0 || k > board.length  || s > board.length -1) continue;
-            console.log("connect ks", board[k][s]);
-             board[k][s];
-            if(!board[k][s].isMine)
-             board[k][s].minesAroundCount++
+function setMinesNegsCount() {
+    for (var i = 0; i < gBoard.length; i++) {
+        for (var j = 0; j < gBoard[0].length; j++) {
+            if (gBoard[i][j].isMine) gBoard[i][j].minesAroundCount = neighbourSearch(gBoard, i, j);
         }
     }
-    console.log(board);
-
-
 }
+
+function neighbourSearch(board, i, j) {
+    for (var k = i - 1; k <= i + 1; k++) {
+        for (var s = j - 1; s <= j + 1; s++) {
+            if (k < 0 || k > board.length - 1 || s < 0 || s > board[0].length - 1 || k === i && s === j) {
+                continue;
+            }
+            if (!board[k][s].isMine) {
+                board[k][s].minesAroundCount++
+            }
+        }
+    }
+}
+
+
 
 function cellClicked(elCell, i, j) {
     var cell = gBoard[i][j];
