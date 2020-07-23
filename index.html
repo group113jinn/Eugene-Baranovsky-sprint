@@ -8,16 +8,26 @@
     <title>Minesweeper</title>
 </head>
 
-<body>
-
-    <table class="mainTable">
-        <thead class="tHead">
-            <tbody class="tBody">
-
-            </tbody>
-        </thead>
-    </table>
+<body onload="init()">
     <div class="main">
+        <div class="level">
+            <input type="radio" id="easy" onclick="levelSetting(this)" name="level" value="4" checked/>
+            <label for="radio-one">Easy</label>
+            <input type="radio" onclick="levelSetting(this)" name="level" value="8" />
+            <label for="radio-two">Hard</label>
+            <input type="radio" onclick="levelSetting(this)" name="level" value="12" />
+            <label for="radio-two">Extreme!</label>
+        </div>
+        <button onclick=init() class="startBtn"></button>
+        <div class="infoNum"></div>
+        <div class="infoTime">00.000</div>
+        <table class="mainTable" oncontextmenu="return false;">
+            <thead class="tHead">
+                <tbody class="tBody">
+
+                </tbody>
+            </thead>
+        </table>
     </div>
     <script src="js/main.js"></script>
 </body>
