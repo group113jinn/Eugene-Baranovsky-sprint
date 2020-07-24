@@ -172,7 +172,7 @@ function cellMarked(elCell, i, j) { // flag interactions
     }
 }
 
-function expandShown(board, i, j) { // used if main cellClicked landed onto free space to show free cells and mine neighbour count cells
+function expandShown(board, elCell, i, j) { // used if main cellClicked landed onto free space to show free cells and mine neighbour count cells
     for (var k = i - 1; k <= i + 1; k++) {
         for (var s = j - 1; s <= j + 1; s++) {
             if (k < 0 || k > board.length - 1 || s < 0 || s > board[0].length - 1 || k === i && s === j) {
