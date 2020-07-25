@@ -18,9 +18,12 @@
             <input type="radio" onclick="levelSetting(this)" name="level" value="12" />
             <label for="radio-two">Extreme!</label>
         </div>
-        <button onclick=init() class="startBtn"></button>
+        <button onclick=init(),reload()  class="startBtn"></button>
+        <button onclick=tipOn(this) class="tipBtn1" class="allTip"></button>
+        <button onclick=tipOn(this) class="tipBtn2" class="allTip"></button>
+        <button onclick=tipOn(this) class="tipBtn3" class="allTip"></button>
         <div class="infoNum"></div>
-        <div class="infoTime">00.000</div>
+        <div class="infoTime">00</div>
         <table class="mainTable" oncontextmenu="return false;">
             <thead class="tHead">
                 <tbody class="tBody">
